@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: plant-fruit-disease-classifier
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 10000

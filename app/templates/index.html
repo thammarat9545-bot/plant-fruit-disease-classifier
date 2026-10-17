@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจำแนกโรคพืชและผลไม้ด้วยภาพ | AI Plant & Fruit Classifier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                    <i data-lucide="leaf" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Plant & Fruit AI Classifier</h1>
+                    <p class="text-xs text-slate-500">ระบบวิเคราะห์โรคพืช ความสุก และผลผลิตเกษตร</p>
+                </div>
+            </div>
+
+            <!-- System status badge -->
+            <div id="system-status" class="flex items-center space-x-2 text-xs bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="system-device">กำลังตรวจสอบระบบ...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
+
+        <!-- Hero Section -->
+        <div class="text-center mb-8">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600"></i>
+                Deep Learning Powered by PyTorch & MobileNetV3
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                วินิจฉัยโรคพืชและตรวจสอบผลไม้ <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">แม่นยำในเสี้ยววินาที</span>
+            </h2>
+            <p class="mt-2 text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">
+                อัปโหลดรูปภาพใบพืชหรือผลไม้ ระบบจะประมวลผลด้วย AI วิเคราะห์ชื่อโรค ระดับความสุก พร้อมให้คำแนะนำและวิธีดูแลรักษาในทันที
+            </p>
+        </div>
+
+        <!-- Mode Selection Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
+            <button type="button" data-mode="disease" class="mode-tab active-tab px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 transition-all">
+                <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                <span>วิเคราะห์โรคพืช/ผลไม้</span>
+            </button>
+            <button type="button" data-mode="ripeness" class="mode-tab inactive-tab px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 transition-all">
+                <i data-lucide="sun" class="w-4 h-4"></i>
+                <span>ตรวจความสุกของผลไม้</span>
+            </button>
+            <button type="button" data-mode="food" class="mode-tab inactive-tab px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 transition-all">
+                <i data-lucide="utensils" class="w-4 h-4"></i>
+                <span>จำแนกชนิดผัก/อาหาร</span>
+            </button>
+            <button type="button" data-mode="auto" class="mode-tab inactive-tab px-4 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 transition-all">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+                <span>ออโต้ดีเทค (Auto AI)</span>
+            </button>
+        </div>
+
+        <!-- Main Interactive Workspace Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <!-- Left Column: Upload & Input Zone (5 Cols) -->
+            <div class="lg:col-span-5 space-y-6">
+                <!-- Dropzone Card -->
+                <div class="bg-white rounded-2xl border-2 border-dashed border-slate-300 hover:border-brand-500 transition-colors p-6 flex flex-col items-center justify-center text-center cursor-pointer shadow-sm group relative" id="drop-zone">
+                    <input type="file" id="file-input" accept="image/*" class="hidden">
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-50 text-brand-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="upload-cloud" class="w-8 h-8"></i>
+                    </div>
+
+                    <h3 class="text-base font-semibold text-slate-800">ลากและวางรูปภาพที่นี่</h3>
+                    <p class="text-xs text-slate-500 mt-1">หรือคลิกเพื่อเลือกไฟล์จากคอมพิวเตอร์ของคุณ</p>
+                    <p class="text-[11px] text-slate-400 mt-2">รองรับไฟล์ JPG, PNG, WEBP ขนาดไม่เกิน 15MB</p>
+
+                    <div class="mt-4 flex items-center gap-3">
+                        <button type="button" id="browse-btn" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-medium shadow-sm transition">
+                            เลือกรูปภาพ
+                        </button>
+                        <button type="button" id="webcam-btn" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium border border-slate-200 flex items-center gap-1.5 transition">
+                            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+                            ถ่ายจากกล้อง
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sample Images Quick Try -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                            <i data-lucide="image" class="w-4 h-4 text-brand-600"></i>
+                            ตัวอย่างภาพสำหรับทดสอบด่วน
+                        </h4>
+                        <span class="text-[11px] text-slate-400">คลิกเพื่อลองทันที</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button type="button" class="sample-btn group relative rounded-xl overflow-hidden border border-slate-200 aspect-square focus:ring-2 focus:ring-brand-500" data-sample="tomato_early_blight">
+                            <img src="https://images.unsplash.com/photo-1592417817098-8f3d6910985c?auto=format&fit=crop&w=200&q=80" alt="มะเขือเทศใบไหม้" class="w-full h-full object-cover group-hover:scale-105 transition">
+                            <span class="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] py-0.5 px-1 truncate text-center">มะเขือเทศ</span>
+                        </button>
+                        <button type="button" class="sample-btn group relative rounded-xl overflow-hidden border border-slate-200 aspect-square focus:ring-2 focus:ring-brand-500" data-sample="apple_scab">
+                            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=200&q=80" alt="แอปเปิ้ล" class="w-full h-full object-cover group-hover:scale-105 transition">
+                            <span class="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] py-0.5 px-1 truncate text-center">แอปเปิ้ล</span>
+                        </button>
+                        <button type="button" class="sample-btn group relative rounded-xl overflow-hidden border border-slate-200 aspect-square focus:ring-2 focus:ring-brand-500" data-sample="corn_common_rust">
+                            <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=200&q=80" alt="ข้าวโพด" class="w-full h-full object-cover group-hover:scale-105 transition">
+                            <span class="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] py-0.5 px-1 truncate text-center">ข้าวโพด</span>
+                        </button>
+                        <button type="button" class="sample-btn group relative rounded-xl overflow-hidden border border-slate-200 aspect-square focus:ring-2 focus:ring-brand-500" data-sample="durian_phytophthora">
+                            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=200&q=80" alt="ใบไม้สมบูรณ์" class="w-full h-full object-cover group-hover:scale-105 transition">
+                            <span class="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] py-0.5 px-1 truncate text-center">ใบสมบูรณ์</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div id="preview-container" class="hidden bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                            <i data-lucide="eye" class="w-4 h-4 text-slate-500"></i> ภาพตัวอย่างที่เลือก
+                        </span>
+                        <button type="button" id="clear-image-btn" class="text-xs text-rose-500 hover:text-rose-600 flex items-center gap-1 font-medium">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> ลบภาพ
+                        </button>
+                    </div>
+                    <div class="relative rounded-xl overflow-hidden bg-slate-900 aspect-video flex items-center justify-center">
+                        <img id="image-preview" src="" alt="Selected Preview" class="max-h-full max-w-full object-contain">
+                        <div id="scan-animation" class="hidden absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/30 to-transparent scan-line pointer-events-none"></div>
+                    </div>
+                    <button type="button" id="analyze-btn" class="w-full mt-4 py-3 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white rounded-xl font-semibold text-sm shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                        <span>เริ่มการวิเคราะห์ด้วย AI</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Results & Diagnosis (7 Cols) -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <!-- Placeholder state before analysis -->
+                <div id="result-placeholder" class="bg-white rounded-2xl border border-slate-200 p-12 text-center shadow-sm flex flex-col items-center justify-center min-h-[420px]">
+                    <div class="w-20 h-20 rounded-3xl bg-slate-50 text-slate-400 flex items-center justify-center mb-4 border border-slate-200">
+                        <i data-lucide="scan-line" class="w-10 h-10 stroke-[1.5]"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-700">ยังไม่มีข้อมูลการวิเคราะห์</h3>
+                    <p class="text-sm text-slate-500 max-w-sm mt-1">
+                        กรุณาอัปโหลดรูปภาพใบพืช ผลไม้ หรืออาหารทางด้านซ้ายเพื่อเริ่มการตรวจจับและรับคำแนะนำในการรักษา
+                    </p>
+                </div>
+
+                <!-- Loading State Card -->
+                <div id="result-loading" class="hidden bg-white rounded-2xl border border-slate-200 p-12 text-center shadow-sm flex flex-col items-center justify-center min-h-[420px]">
+                    <div class="w-16 h-16 relative flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full border-4 border-slate-100 border-t-brand-600 animate-spin"></div>
+                        <i data-lucide="cpu" class="w-7 h-7 text-brand-600 absolute"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-800">AI กำลังวิเคราะห์รูปภาพของคุณ...</h3>
+                    <p class="text-xs text-slate-500 mt-1">ประมวลผลคุณลักษณะด้วย Convolutional Neural Network</p>
+                </div>
+
+                <!-- Analysis Result Card -->
+                <div id="result-content" class="hidden space-y-6">
+
+                    <!-- Top Primary Diagnosis Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm relative overflow-hidden">
+                        <div id="status-accent-bar" class="absolute top-0 left-0 right-0 h-1.5 bg-brand-500"></div>
+
+                        <div class="flex flex-wrap items-start justify-between gap-4">
+                            <div>
+                                <span id="crop-badge" class="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200 mb-2 inline-block">
+                                    พืช / ผลไม้
+                                </span>
+                                <h3 id="disease-name-th" class="text-2xl font-bold text-slate-900 leading-snug">
+                                    ชื่อโรคพืชหรือสถานะ
+                                </h3>
+                                <p id="disease-name-en" class="text-sm text-slate-500 italic">
+                                    English Name
+                                </p>
+                            </div>
+
+                            <div class="text-right">
+                                <span id="health-status-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                                    สุขภาพดี
+                                </span>
+                                <div class="mt-2 text-right">
+                                    <div class="text-2xl font-black text-slate-900" id="confidence-percentage">98.5%</div>
+                                    <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">ความมั่นใจของ AI</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confidence Bar -->
+                        <div class="mt-4">
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div id="confidence-bar-fill" class="bg-brand-600 h-2.5 rounded-full transition-all duration-700" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical & Agricultural Action Card (Tabs/Sections) -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-3">
+                            <i data-lucide="clipboard-list" class="w-4 h-4 text-brand-600"></i>
+                            ผลการตรวจวินิจฉัยและคำแนะนำเชิงลึก
+                        </h4>
+
+                        <!-- Section: Symptoms -->
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80">
+                            <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5 mb-1.5 text-amber-700">
+                                <i data-lucide="alert-circle" class="w-4 h-4"></i> อาการที่สังเกตได้ (Symptoms)
+                            </h5>
+                            <p id="disease-symptoms" class="text-sm text-slate-600 leading-relaxed"></p>
+                        </div>
+
+                        <!-- Section: Causes -->
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80">
+                            <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5 mb-1.5 text-indigo-700">
+                                <i data-lucide="microscope" class="w-4 h-4"></i> สาเหตุและเชื้อก่อโรค (Causes & Pathogens)
+                            </h5>
+                            <p id="disease-causes" class="text-sm text-slate-600 leading-relaxed"></p>
+                        </div>
+
+                        <!-- Section: Treatment Guidelines -->
+                        <div class="bg-emerald-50/70 rounded-xl p-4 border border-emerald-200/80">
+                            <h5 class="text-xs font-bold text-emerald-800 uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                                <i data-lucide="stethoscope" class="w-4 h-4 text-emerald-600"></i> วิธีดูแลรักษาและฟื้นฟู (Treatment & Remedies)
+                            </h5>
+                            <ul id="disease-treatment-list" class="space-y-2 text-sm text-emerald-950"></ul>
+                        </div>
+
+                        <!-- Section: Long-term Prevention -->
+                        <div class="bg-sky-50/70 rounded-xl p-4 border border-sky-200/80">
+                            <h5 class="text-xs font-bold text-sky-800 uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                                <i data-lucide="shield-check" class="w-4 h-4 text-sky-600"></i> การป้องกันในระยะยาว (Prevention)
+                            </h5>
+                            <ul id="disease-prevention-list" class="space-y-2 text-sm text-sky-950"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Top 3 Alternative Probabilities -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-1.5">
+                            <i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-600"></i>
+                            การกระจายความน่าจะเป็น (Probability Breakdown)
+                        </h4>
+                        <div id="top-predictions-container" class="space-y-2.5"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Webcam Modal -->
+    <div id="webcam-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">
+            <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i data-lucide="camera" class="w-4 h-4 text-brand-600"></i> ถ่ายภาพใบพืชหรือผลไม้
+                </h3>
+                <button type="button" id="close-webcam-btn" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-4 bg-slate-900 aspect-video relative flex items-center justify-center">
+                <video id="webcam-video" autoplay playsinline class="max-h-full max-w-full object-contain"></video>
+                <canvas id="webcam-canvas" class="hidden"></canvas>
+            </div>
+            <div class="p-4 bg-slate-50 flex items-center justify-end gap-2">
+                <button type="button" id="cancel-webcam-btn" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-xs font-medium">ยกเลิก</button>
+                <button type="button" id="capture-webcam-btn" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-medium flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="aperture" class="w-4 h-4"></i> ถ่ายรูปนี้
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>© 2026 Plant & Fruit Disease Classifier AI. All rights reserved.</p>
+            <p class="flex items-center gap-1">
+                สร้างด้วย <span class="text-rose-500">❤</span> เพื่อเกษตรกรรมยุคใหม่ (Smart Farming AI)
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/static/js/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

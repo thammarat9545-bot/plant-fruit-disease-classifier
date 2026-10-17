@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git/
+.gitignore
+.vscode/
+.idea/
+dataset/
+models/*.pth
+!models/best_model.pth
+venv/
+.env
