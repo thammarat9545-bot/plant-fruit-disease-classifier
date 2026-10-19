@@ -411,6 +411,85 @@ KNOWLEDGE_BASE = {
         ]
     },
 
+    # ------------------ STRAWBERRY (สตรอว์เบอร์รี่) ------------------
+    "strawberry_healthy": {
+        "name_th": "ผลและต้นสตรอว์เบอร์รี่สมบูรณ์ แข็งแรง (Healthy Strawberry)",
+        "name_en": "Strawberry Healthy",
+        "category": "disease",
+        "crop": "สตรอว์เบอร์รี่ (Strawberry)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ผลสีแดงสด ผิวเรียบเนียน เมล็ดกระจายสม่ำเสมอ ใบเขียวสดสมบูรณ์ ไม่มีจุดแผลหรือรอยไหม้ ขั้วผลสีเขียวสดใส",
+        "causes": "พืชได้รับแสงแดดเพียงพอ ดินระบายน้ำดี ได้รับธาตุอาหารโพแทสเซียม แคลเซียม และโบรอนอย่างสมดุล",
+        "treatment": [
+            "เก็บเกี่ยวในเวลาเช้าตรู่เพื่อรักษาความสดและความแน่นของเนื้อผล",
+            "คลุมแปลงด้วยพลาสติกหรือฟางข้าวเพื่อไม่ให้ผลสัมผัสดินโดยตรง",
+            "ให้น้ำแบบหยดที่โคนต้น หลีกเลี่ยงการพ่นน้ำใส่ผลและใบ"
+        ],
+        "prevention": [
+            "หมั่นตัดแต่งใบแก่และใบแห้งที่โคนกอเพื่อให้อากาศถ่ายเทสะดวก",
+            "ควบคุมความชื้นในโรงเรือนหรือแปลงปลูกไม่ให้แฉะเกินไป"
+        ]
+    },
+    "strawberry_leaf_scorch": {
+        "name_th": "โรคใบไหม้หรือราจุดใบสตรอว์เบอร์รี่ (Strawberry Leaf Scorch)",
+        "name_en": "Strawberry Leaf Scorch",
+        "category": "disease",
+        "crop": "สตรอว์เบอร์รี่ (Strawberry)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "เกิดจุดแผลสีม่วงอมแดงขนาดเล็กบนใบ ต่อมาตรงกลางแผลจะแห้งเป็นสีน้ำตาล แผลลามขยายจนใบแห้งไหม้ ขอบใบม้วนงอและร่วงก่อนกำหนด",
+        "causes": "เกิดจากเชื้อรา Diplocarpon earlianum ระบาดรวดเร็วในสภาพอากาศชื้น ฝนตกชุก หรือการรดน้ำโดนใบ",
+        "treatment": [
+            "เด็ดใบที่เป็นโรคออกและนำไปเผาทำลายทันที ห้ามทิ้งไว้ในแปลง",
+            "พ่นสารชีวภัณฑ์เชื้อราไตรโคเดอร์มา (Trichoderma harzianum) ทุก 5-7 วัน",
+            "หากระบาดรุนแรง ให้พ่นสารป้องกันกำจัดเชื้อรา เช่น ไดฟีโนโคนาโซล (Difenoconazole) หรือ อะซอกซีสโตรบิน (Azoxystrobin)"
+        ],
+        "prevention": [
+            "ใช้ระบบน้ำหยด หลีกเลี่ยงการรดน้ำจากด้านบน",
+            "จัดระยะปลูกให้มีช่องว่างลมพัดผ่านสะดวก ไม่ปลูกชิดแน่นเกินไป",
+            "คลุมแปลงปลูกด้วยพลาสติกสีดำเพื่อป้องกันสปอร์เชื้อราจากดินกระเด็นโดนใบ"
+        ]
+    },
+    "strawberry_fruit_rot": {
+        "name_th": "โรคราสีเทาผลเน่าสตรอว์เบอร์รี่ (Strawberry Gray Mold / Botrytis Fruit Rot)",
+        "name_en": "Strawberry Gray Mold Fruit Rot",
+        "category": "disease",
+        "crop": "สตรอว์เบอร์รี่ (Strawberry)",
+        "is_healthy": False,
+        "severity": "High",
+        "symptoms": "ผลมีแผลฉ่ำน้ำสีน้ำตาลอ่อน จากนั้นผิวผลจะนิ่มยุบตัวและมีเส้นใยผงสปอร์ราสีเทาปกคลุมทั่วผล ผลจะเน่าแห้งและแพร่เชื้อไปยังผลข้างเคียงอย่างรวดเร็ว",
+        "causes": "เกิดจากเชื้อรา Botrytis cinerea มักระบาดในระยะดอกและผลเมื่อมีความชื้นสูง อากาศเย็น และมีน้ำค้างจัด",
+        "treatment": [
+            "เก็บผลและดอกที่เป็นโรคใส่ถุงทิ้งนอกแปลงปลูกทันทีเพื่อไม่ให้สปอร์ฟุ้งกระจาย",
+            "ฉีดพ่นสารชีวภัณฑ์ บาซิลลัส ซับทิลิส (Bacillus subtilis) หรือ ไตรโคเดอร์มา",
+            "หากเกิดการระบาด พ่นสารแคปแทน (Captan) หรือ ฟลูไดออกโซนิล (Fludioxonil) ตามคำแนะนำทางวิชาการ"
+        ],
+        "prevention": [
+            "คลุมแปลงด้วยฟางหรือพลาสติกเพื่อยกระดับผลไม่ให้สัมผัสผิวดินหรือน้ำขัง",
+            "เก็บเกี่ยวผลผลิตที่สุกพอดีอย่างสม่ำเสมอ ไม่ปล่อยให้ผลสุกงอมค้างต้น",
+            "เปิดระบายอากาศในโรงเรือนเพื่อลดความชื้นสะสม"
+        ]
+    },
+    "strawberry_powdery_mildew": {
+        "name_th": "โรคราแป้งสตรอว์เบอร์รี่ (Strawberry Powdery Mildew)",
+        "name_en": "Strawberry Powdery Mildew",
+        "category": "disease",
+        "crop": "สตรอว์เบอร์รี่ (Strawberry)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "ขอบใบม้วนงอขึ้น ใต้ใบมีผงสีขาวคล้ายแป้งปกคลุม ดอกแห้งฝ่อ ผลแคระแกร็น ผิวผลด้านแข็ง และไม่เจริญเติบโต",
+        "causes": "เกิดจากเชื้อรา Podosphaera aphanis เจริญเติบโตได้ดีในสภาพอากาศแห้งแต่มีความชื้นสัมพัทธ์สูงในเวลากลางคืน",
+        "treatment": [
+            "พ่นกำมะถันผงละลายน้ำ (Wettable sulfur) หรือ โพแทสเซียมไบคาร์บอเนต",
+            "ตัดแต่งใบที่เป็นโรคออกเพื่อลดปริมาณเชื้อในแปลง"
+        ],
+        "prevention": [
+            "ปลูกพันธุ์ที่ต้านทานโรค",
+            "หลีกเลี่ยงการให้ปปุ๋ยไนโตรเจนสูงเกินไป เพราะทำให้เนื้อเยื่อพืชอ่อนแอต่อการเข้าทำลาย"
+        ]
+    },
+
     # ------------------ FRUIT RIPENESS (การวิเคราะห์ความสุกของผลไม้) ------------------
     "ripeness_unripe": {
         "name_th": "ผลไม้ระยะดิบ (Unripe / Green)",
@@ -499,31 +578,449 @@ KNOWLEDGE_BASE = {
             "หลีกเลี่ยงการวางอาหารที่ปรุงสุกทิ้งไว้ในอุณหภูมิห้องเกิน 4 ชั่วโมง"
         ]
     }
+,
+    # ------------------ BLUEBERRY (บลูเบอร์รี่) ------------------
+    "blueberry_healthy": {
+        "name_th": "ต้นบลูเบอร์รี่สมบูรณ์ แข็งแรง (Healthy Blueberry)",
+        "name_en": "Blueberry Healthy",
+        "category": "disease",
+        "crop": "บลูเบอร์รี่ (Blueberry)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ใบสีเขียวเข้ม ผิวใบเรียบมัน ไม่มีรอยด่างหรือจุดแผล กิ่งก้านสมบูรณ์",
+        "causes": "พืชได้รับดินที่เป็นกรดอ่อน (pH 4.5-5.5) และแสงแดดเพียงพอ ปราศจากโรคราและแมลง",
+        "treatment": [
+            "ดูแลรักษาความชื้นสม่ำเสมอ คลุมโคนด้วยเปลือกสนหรือพีทมอส",
+            "ให้ปุ๋ยสูตรสำหรับพืชชอบดินกรดอย่างเหมาะสม"
+        ],
+        "prevention": [
+            "หลีกเลี่ยงการใช้น้ำที่มีค่าหินปูนสูงรดต้น",
+            "ตรวจแปลงสม่ำเสมอ"
+        ]
+    },
+
+    # ------------------ CHERRY (เชอร์รี่) ------------------
+    "cherry_powdery_mildew": {
+        "name_th": "โรคราแป้งเชอร์รี่ (Cherry Powdery Mildew)",
+        "name_en": "Cherry Powdery Mildew",
+        "category": "disease",
+        "crop": "เชอร์รี่ (Cherry)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "มีผงฝุ่นสีขาวคล้ายแป้งปกคลุมบนผิวใบและยอดอ่อน ใบม้วนงอและผิดรูป ผลอ่อนอาจแตกหรือแคระแกร็น",
+        "causes": "เกิดจากเชื้อรา Podosphaera clandestina เจริญเติบโตได้ดีในสภาพอากาศอบอุ่น มีความชื้นสัมพัทธ์สูงในเวลากลางคืน",
+        "treatment": [
+            "พ่นสารชีวภัณฑ์ เช่น บาซิลลัส ซับทิลิส (Bacillus subtilis) หรือกำมะถันผง",
+            "ตัดแต่งกิ่งที่เป็นโรคและมีผงราปกคลุมไปทำลาย"
+        ],
+        "prevention": [
+            "ตัดแต่งทรงพุ่มให้โปร่ง ลมพัดผ่านได้ดีเพื่อลดความชื้นสะสม",
+            "หลีกเลี่ยงการให้ปุ๋ยไนโตรเจนมากเกินไป"
+        ]
+    },
+    "cherry_healthy": {
+        "name_th": "ต้นเชอร์รี่สมบูรณ์ แข็งแรง (Healthy Cherry)",
+        "name_en": "Cherry Healthy",
+        "category": "disease",
+        "crop": "เชอร์รี่ (Cherry)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ใบสีเขียวสด แข็งแรง ก้านใบเหนียว ไม่มีจุดด่างหรือคราบเชื้อรา",
+        "causes": "ต้นได้รับแสงแดดเต็มที่ มีการระบายน้ำดีและได้รับธาตุอาหารครบถ้วน",
+        "treatment": [
+            "รดน้ำสม่ำเสมอ บำรุงด้วยปุ๋ยอินทรีย์รอบทรงพุ่มตามระยะ"
+        ],
+        "prevention": [
+            "ตัดแต่งกิ่งแห้ง กิ่งเป็นโรคช่วงพักตัวในฤดูหนาว"
+        ]
+    },
+
+    # ------------------ CORN - ADDITIONAL ------------------
+    "corn_gray_leaf_spot": {
+        "name_th": "โรคใบจุดสีเทาข้าวโพด (Corn Gray Leaf Spot)",
+        "name_en": "Corn Gray Leaf Spot",
+        "category": "disease",
+        "crop": "ข้าวโพด (Corn)",
+        "is_healthy": False,
+        "severity": "High",
+        "symptoms": "แผลรูปสี่เหลี่ยมผืนผ้าสีเทาหรือน้ำตาลอ่อน ขนานไปตามเส้นใบ ขอบแผลคมชัด เมื่อระบาดมากแผลจะรวมกันทำให้ใบไหม้แห้งตายทั้งใบ",
+        "causes": "เกิดจากเชื้อรา Cercospora zeae-maydis ระบาดหนักในสภาพอากาศร้อนชื้น ฝนตกชุกและมีหมอกจัด",
+        "treatment": [
+            "พ่นสารป้องกันกำจัดเชื้อรา เช่น อะซอกซีสโตรบิน (Azoxystrobin) หรือไพราโคลสโตรบิน (Pyraclostrobin)",
+            "กำจัดเศษซากใบข้าวโพดที่เป็นโรคหลังเก็บเกี่ยว"
+        ],
+        "prevention": [
+            "ปลูกพันธุ์ข้าวโพดที่ต้านทานโรค",
+            "ปลูกพืชหมุนเวียนสลับกับพืชตระกูลถั่ว"
+        ]
+    },
+
+    # ------------------ GRAPE - ADDITIONAL ------------------
+    "grape_esca": {
+        "name_th": "โรคเอสกา / หูดดำองุ่น (Grape Esca / Black Measles)",
+        "name_en": "Grape Esca (Black Measles)",
+        "category": "disease",
+        "crop": "องุ่น (Grape)",
+        "is_healthy": False,
+        "severity": "High",
+        "symptoms": "ใบมีลวดลายคล้ายลายเสือ (Tiger-stripe) เนื้อใบระหว่างเส้นใบเปลี่ยนเป็นสีเหลืองหรือน้ำตาลไหม้ ผลมีจุดด่างดำคล้ายโรคหัด",
+        "causes": "เกิดจากกลุ่มเชื้อราหลายชนิดเข้าทำลายท่อน้ำท่ออาหาร เช่น Phaeomoniella chlamydospora มักพบในเถาองุ่นอายุมาก",
+        "treatment": [
+            "ตัดแต่งและทำความสะอาดแผลกิ่งที่ติดเชื้อ ทาด้วยปูนแดงหรือสารป้องกันเชื้อรา",
+            "กำจัดเถาที่แห้งตายออกจากแปลงทันที"
+        ],
+        "prevention": [
+            "หลีกเลี่ยงการตัดแต่งกิ่งขณะฝนตกหรือมีความชื้นสูง",
+            "ฆ่าเชื้ออุปกรณ์ตัดแต่งกิ่งด้วยแอลกอฮอล์"
+        ]
+    },
+    "grape_leaf_blight": {
+        "name_th": "โรคใบไหม้องุ่น / ใบจุดไอซาริออปซิส (Grape Leaf Blight)",
+        "name_en": "Grape Leaf Blight",
+        "category": "disease",
+        "crop": "องุ่น (Grape)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "แผลจุดกลมหรือเหลี่ยมสีน้ำตาลเข้มถึงดำ บนผิวใบมักมีวงแหวนซ้อนกัน ใบร่วงก่อนกำหนดทำให้ผลผลิตลดลง",
+        "causes": "เกิดจากเชื้อรา Pseudocercospora vitis (Isariopsis clavispora) แพร่ระบาดทางลมและน้ำฝน",
+        "treatment": [
+            "พ่นสารป้องกันกำจัดเชื้อรากลุ่มคอปเปอร์ หรือแมนโคเซบ",
+            "เก็บใบที่ร่วงหล่นใต้ต้นไปเผาทำลาย"
+        ],
+        "prevention": [
+            "ตัดแต่งใบด้านล่างเพื่อให้อากาศถ่ายเทสะดวก แสงแดดส่องถึงโคนต้น"
+        ]
+    },
+
+    # ------------------ CITRUS - ADDITIONAL ------------------
+    "citrus_greening": {
+        "name_th": "โรคใบแก้ว / โรคกรีนนิ่งส้ม (Citrus Greening / Huanglongbing)",
+        "name_en": "Citrus Greening (Huanglongbing)",
+        "category": "disease",
+        "crop": "ส้ม/มะนาว (Citrus)",
+        "is_healthy": False,
+        "severity": "High",
+        "symptoms": "ใบมีสีด่างเหลืองไม่สม่ำเสมอทั้งสองข้างของเส้นกลางใบ เส้นใบหนาด้าน ผลมีขนาดเล็ก เบี้ยว รสเปรี้ยวจัด เมล็ดลีบดำ",
+        "causes": "เกิดจากเชื้อแบคทีเรีย Candidatus Liberibacter asiaticus โดยมี เพลี้ยไก่แจ้ส้ม (Diaphorina citri) เป็นพาหะนำโรค",
+        "treatment": [
+            "ไม่มียารักษา หากพบต้นเป็นโรครุนแรงต้องขุดทำลายเพื่อป้องกันการแพร่ระบาด",
+            "พ่นสารกำจัดเพลี้ยไก่แจ้ส้ม เช่น อิมิดาโคลพริด (Imidacloprid)"
+        ],
+        "prevention": [
+            "ใช้กิ่งพันธุ์ปลอดโรคที่ผ่านการรับรอง",
+            "ตรวจดักจับเพลี้ยไก่แจ้ส้มด้วยกับดักกาวสีเหลือง"
+        ]
+    },
+
+    # ------------------ PEACH (พีช) ------------------
+    "peach_bacterial_spot": {
+        "name_th": "โรคจุดแบคทีเรียพีช (Peach Bacterial Spot)",
+        "name_en": "Peach Bacterial Spot",
+        "category": "disease",
+        "crop": "พีช (Peach)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "จุดแผลชุ่มน้ำขนาดเล็กสีม่วงแดงหรือน้ำตาล ต่อมาแผลแห้งและหลุดออกเกิดเป็นรูพรุน (Shot-hole) ผลแตกเป็นแผลสะเก็ดลึก",
+        "causes": "เกิดจากแบคทีเรีย Xanthomonas arboricola pv. pruni แพร่กระจายทางละอองฝนและลมพายุ",
+        "treatment": [
+            "พ่นสารประกอบทองแดง (Copper fungicides) ในช่วงก่อนออกดอกและหลังเก็บเกี่ยว",
+            "ตัดแต่งกิ่งที่เป็นแผลสะเก็ดออก"
+        ],
+        "prevention": [
+            "หลีกเลี่ยงการปลูกในพื้นที่ลมพัดแรงจัดโดยไม่มีแนวกันลม",
+            "เลือกใช้สายพันธุ์ที่ทนทานต่อแบคทีเรีย"
+        ]
+    },
+    "peach_healthy": {
+        "name_th": "ต้นพีชสมบูรณ์ แข็งแรง (Healthy Peach)",
+        "name_en": "Peach Healthy",
+        "category": "disease",
+        "crop": "พีช (Peach)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ใบเรียวยาวสีเขียวสด ผิวใบเรียบสม่ำเสมอ กิ่งก้านเจริญเติบโตดี ผลผิวสวยเนียน",
+        "causes": "ต้นได้รับแสงแดดเต็มวัน มีการระบายน้ำดีและจัดการปุ๋ยอย่างสมดุล",
+        "treatment": [
+            "ให้น้ำอย่างสม่ำเสมอระวังอย่าให้น้ำขังโคน",
+            "ใส่ปุ๋ยบำรุงตามระยะฟีนวิทยาของพืช"
+        ],
+        "prevention": [
+            "พ่นสารป้องกันศัตรูพืชช่วงพักตัวก่อนเริ่มแตกตาใบใหม่"
+        ]
+    },
+
+    # ------------------ PEPPER BELL (พริกหวาน) ------------------
+    "pepper_bell_bacterial_spot": {
+        "name_th": "โรคจุดแบคทีเรียพริกหวาน (Bell Pepper Bacterial Spot)",
+        "name_en": "Bell Pepper Bacterial Spot",
+        "category": "disease",
+        "crop": "พริกหวาน (Bell Pepper)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "จุดฉ่ำน้ำขนาดเล็กสีเขียวเข้มบนใบ ต่อมาเปลี่ยนเป็นสีน้ำตาลเข้มขอบเหลือง แผลสะเก็ดนูนบนผลพริก ใบเหลืองและร่วงหล่น",
+        "causes": "เกิดจากแบคทีเรีย Xanthomonas euvesicatoria แพร่กระจายรวดเร็วในสภาพอากาศร้อนชื้นและฝนตกชุก",
+        "treatment": [
+            "พ่นสารคอปเปอร์ไฮดรอกไซด์ผสมแมนโคเซบเพื่อยับยั้งการลุกลาม",
+            "หลีกเลี่ยงการเข้าไปทำงานในแปลงขณะใบยังเปียกน้ำ"
+        ],
+        "prevention": [
+            "แช่เมล็ดพันธุ์ในน้ำอุ่น 50°C นาน 25 นาทีก่อนเพาะ",
+            "ให้น้ำทางสายน้ำหยดแทนสปริงเกอร์"
+        ]
+    },
+    "pepper_bell_healthy": {
+        "name_th": "ต้นพริกหวานสมบูรณ์ แข็งแรง (Healthy Bell Pepper)",
+        "name_en": "Bell Pepper Healthy",
+        "category": "disease",
+        "crop": "พริกหวาน (Bell Pepper)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ใบกว้างสีเขียวเข้มเป็นมัน แผ่นใบเรียบ ลำต้นตั้งตรง แข็งแรง ติดดอกและผลดก",
+        "causes": "ได้รับแสงแดดและแคลเซียม-โบรอนเพียงพอ ดินระบายน้ำได้ดี",
+        "treatment": [
+            "รดน้ำสม่ำเสมอที่โคนต้น บำรุงด้วยปุ๋ยอินทรีย์และธาตุอาหารรองเสริม"
+        ],
+        "prevention": [
+            "คลุมโคนต้นด้วยพลาสติกหรือฟางข้าวเพื่อรักษาความชื้นและกันโรคจากดิน"
+        ]
+    },
+
+    # ------------------ RASPBERRY (ราสเบอร์รี่) ------------------
+    "raspberry_healthy": {
+        "name_th": "ต้นราสเบอร์รี่สมบูรณ์ แข็งแรง (Healthy Raspberry)",
+        "name_en": "Raspberry Healthy",
+        "category": "disease",
+        "crop": "ราสเบอร์รี่ (Raspberry)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ใบประกอบหยักฟันเลื่อยสีเขียวสด ลำต้นมีหนามแข็งแรง ไม่มีจุดไหม้หรือการเหี่ยวเฉา",
+        "causes": "ดินมีความอุดมสมบูรณ์สูง ระบายน้ำได้ดี และได้รับแสงแดดเพียงพอ",
+        "treatment": [
+            "รดน้ำสม่ำเสมอ โยงค้างให้กิ่งโปร่ง",
+            "ตัดกิ่งเก่าที่ให้ผลแล้วออกหลังเก็บเกี่ยว"
+        ],
+        "prevention": [
+            "หลีกเลี่ยงน้ำท่วมขังบริเวณราก"
+        ]
+    },
+
+    # ------------------ SOYBEAN (ถั่วเหลือง) ------------------
+    "soybean_healthy": {
+        "name_th": "ต้นถั่วเหลืองสมบูรณ์ แข็งแรง (Healthy Soybean)",
+        "name_en": "Soybean Healthy",
+        "category": "disease",
+        "crop": "ถั่วเหลือง (Soybean)",
+        "is_healthy": True,
+        "severity": "None",
+        "symptoms": "ใบประกอบ 3 ใบ สีเขียวสดใส แข็งแรง ลำต้นตรง มีปมรากตรึงไนโตรเจนสมบูรณ์",
+        "causes": "ได้รับแสงแดด น้ำ และธาตุอาหารสมดุล มีไรโซเบียมช่วยตรึงไนโตรเจนในดิน",
+        "treatment": [
+            "กำจัดวัชพืชในช่วง 30 วันแรกหลังปลูก",
+            "ให้น้ำในระยะออกดอกและติดฝัก"
+        ],
+        "prevention": [
+            "ปลูกพืชหมุนเวียนและคลุกเมล็ดด้วยเชื้อไรโซเบียมก่อนปลูก"
+        ]
+    },
+
+    # ------------------ SQUASH (ฟักทอง/สควอช) ------------------
+    "squash_powdery_mildew": {
+        "name_th": "โรคราแป้งฟักทอง/สควอช (Squash Powdery Mildew)",
+        "name_en": "Squash Powdery Mildew",
+        "category": "disease",
+        "crop": "พืชตระกูลฟักทอง (Squash)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "คราบผงสีขาวคล้ายแป้งเกาะกระจายทั่วผิวใบทั้งด้านบนและด้านล่าง ใบแก่เหลืองกรอบและแห้งตาย ผลสุกก่อนกำหนดและผิวไหม้แดด",
+        "causes": "เกิดจากเชื้อรา Podosphaera xanthii ระบาดได้ดีในที่ร่ม ลมสงบ และมีความชื้นสูง",
+        "treatment": [
+            "พ่นสารชีวภัณฑ์ เช่น บาซิลลัส ซับทิลิส หรือเบกกิ้งโซดาผสมน้ำและน้ำมันพืช",
+            "หากระบาดรุนแรงให้พ่นไดฟีโนโคนาโซล (Difenoconazole)"
+        ],
+        "prevention": [
+            "ปลูกในที่โล่งแจ้งแสงแดดส่องถึงทั่วแปลง",
+            "ตัดใบแก่ด้านล่างออกเพื่อเพิ่มการไหลเวียนของอากาศ"
+        ]
+    },
+
+    # ------------------ TOMATO - ADDITIONAL ------------------
+    "tomato_leaf_mold": {
+        "name_th": "โรครากำมะหยี่มะเขือเทศ (Tomato Leaf Mold)",
+        "name_en": "Tomato Leaf Mold",
+        "category": "disease",
+        "crop": "มะเขือเทศ (Tomato)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "ด้านบนใบเกิดจุดสีเหลืองซีด ด้านใต้ใบตรงจุดเดียวกันจะมีกลุ่มเส้นใยเชื้อราสีเขียวมะกอกหรือน้ำตาลกำมะหยี่ ใบม้วนงอและแห้งตาย",
+        "causes": "เกิดจากเชื้อรา Passalora fulva (Cladosporium fulvum) มักระบาดในโรงเรือนที่มีความชื้นสูงเกิน 85%",
+        "treatment": [
+            "เพิ่มการระบายอากาศในโรงเรือนเพื่อลดความชื้น",
+            "พ่นสารป้องกันกำจัดเชื้อรา เช่น คอปเปอร์ไฮดรอกไซด์ หรือคลอโรทาโลนิล"
+        ],
+        "prevention": [
+            "หลีกเลี่ยงการปลูกแน่นเกินไป",
+            "เปิดระบายอากาศโรงเรือนเป็นประจำ"
+        ]
+    },
+    "tomato_septoria_leaf_spot": {
+        "name_th": "โรคใบจุดเซพโทเรียมะเขือเทศ (Tomato Septoria Leaf Spot)",
+        "name_en": "Tomato Septoria Leaf Spot",
+        "category": "disease",
+        "crop": "มะเขือเทศ (Tomato)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "แผลจุดกลมขนาดเล็กจำนวนมาก ตรงกลางแผลสีเทาขอบสีน้ำตาลเข้ม มีจุดสีดำเล็กๆ กระจายอยู่ในแผล ใบเหลืองและร่วงจากด้านล่างขึ้นสู่ด้านบน",
+        "causes": "เกิดจากเชื้อรา Septoria lycopersici ระบาดได้ดีในฤดูฝน อุณหภูมิอบอุ่น 20-25°C",
+        "treatment": [
+            "เด็ดใบที่เป็นโรคทิ้งทันที",
+            "พ่นสารชีวภัณฑ์ไตรโคเดอร์มา หรือสารแมนโคเซบ/คลอโรทาโลนิล"
+        ],
+        "prevention": [
+            "คลุมโคนต้นด้วยฟางเพื่อกันน้ำกระเด็นพาเชื้อจากดินขึ้นใบ",
+            "ปลูกพืชหมุนเวียน 2-3 ปี"
+        ]
+    },
+    "tomato_spider_mites": {
+        "name_th": "ไรแดงสองจุดเข้าทำลายมะเขือเทศ (Two-Spotted Spider Mites)",
+        "name_en": "Tomato Spider Mites Damage",
+        "category": "disease",
+        "crop": "มะเขือเทศ (Tomato)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "ใบมีจุดประสีเหลืองหรือขาวซีดกระจายทั่วใบ ใต้ใบพบเส้นใยแมงมุมบางๆ และตัวไรขนาดจิ๋วสีแดงหรือเหลือง ใบแห้งกรอบและร่วง",
+        "causes": "เกิดจากไรแดง Tetranychus urticae ดูดกินน้ำเลี้ยง มักระบาดรุนแรงในสภาพอากาศแห้งแล้งและร้อนจัด",
+        "treatment": [
+            "พ่นน้ำแรงๆ ใต้ใบเพื่อลดประชากรไร",
+            "ใช้น้ำมันแร่ (White oil) หรือสารชีวภัณฑ์บิวเวอเรีย (Beauveria bassiana)",
+            "หากระบาดรุนแรงให้ใช้สารกำจัดไร เช่น อะบาเมกติน (Abamectin)"
+        ],
+        "prevention": [
+            "รักษาความชื้นในแปลงอย่างสม่ำเสมอ หลีกเลี่ยงสภาพแห้งแล้งสะสม"
+        ]
+    },
+    "tomato_target_spot": {
+        "name_th": "โรคใบจุดเป้าธนูมะเขือเทศ (Tomato Target Spot)",
+        "name_en": "Tomato Target Spot",
+        "category": "disease",
+        "crop": "มะเขือเทศ (Tomato)",
+        "is_healthy": False,
+        "severity": "Medium",
+        "symptoms": "แผลจุดสีน้ำตาลเข้ม มีวงซ้อนกันชัดเจนคล้ายเป้าธนู พบได้ทั้งบนใบ ลำต้น และผล ทำให้ผลแตกและเน่าเสีย",
+        "causes": "เกิดจากเชื้อรา Corynespora cassiicola ระบาดหนักในสภาพอากาศอบอุ่นและมีความชื้นสูงต่อเนื่อง",
+        "treatment": [
+            "ตัดแต่งใบด้านล่างที่เป็นโรคออก",
+            "พ่นสารกำจัดเชื้อรา เช่น อะซอกซีสโตรบิน หรือแมนโคเซบ"
+        ],
+        "prevention": [
+            "เพิ่มระยะห่างระหว่างต้นมะเขือเทศเพื่อให้อากาศถ่ายเท",
+            "ใช้น้ำหยดแทนการพ่นน้ำจากด้านบน"
+        ]
+    },
+    "tomato_mosaic_virus": {
+        "name_th": "โรคไวรัสโมเสกมะเขือเทศ (Tomato Mosaic Virus)",
+        "name_en": "Tomato Mosaic Virus (ToMV)",
+        "category": "disease",
+        "crop": "มะเขือเทศ (Tomato)",
+        "is_healthy": False,
+        "severity": "High",
+        "symptoms": "ใบด่างเขียวเข้มสลับเขียวอ่อน ใบหงิกงอ บิดเบี้ยว ลำต้นชะงักการเจริญเติบโต ผลมีสีด่างและสุกไม่สม่ำเสมอ",
+        "causes": "เกิดจากเชื้อไวรัส Tomato Mosaic Virus (ToMV) ติดต่อได้ง่ายมากผ่านการสัมผัส มือ อุปกรณ์ตัดแต่ง และเมล็ดพันธุ์",
+        "treatment": [
+            "ไม่มียารักษา ต้องถอนต้นที่เป็นโรคใส่ถุงและนำไปทำลายนอกแปลงทันที",
+            "ล้างมือและแช่อุปกรณ์ทำสวนด้วยน้ำสบู่หรือน้ำยาฟอกขาวเจือจาง"
+        ],
+        "prevention": [
+            "เลือกใช้เมล็ดพันธุ์ที่ต้านทานไวรัส ToMV",
+            "ห้ามสูบบุหรี่ในแปลงปลูกเพราะยาสูบอาจมีเชื้อไวรัสปนเปื้อน"
+        ]
+    }}
+
+
+
+# Mapping table from raw PlantVillage 38 class identifiers to knowledge base keys
+PLANTVILLAGE_TO_KB = {
+    "Apple___Apple_scab": "apple_scab",
+    "Apple___Black_rot": "apple_black_rot",
+    "Apple___Cedar_apple_rust": "apple_cedar_rust",
+    "Apple___healthy": "apple_healthy",
+    "Blueberry___healthy": "blueberry_healthy",
+    "Cherry_(including_sour)___Powdery_mildew": "cherry_powdery_mildew",
+    "Cherry_(including_sour)___healthy": "cherry_healthy",
+    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": "corn_gray_leaf_spot",
+    "Corn_(maize)___Common_rust_": "corn_common_rust",
+    "Corn_(maize)___Northern_Leaf_Blight": "corn_northern_leaf_blight",
+    "Corn_(maize)___healthy": "corn_healthy",
+    "Grape___Black_rot": "grape_black_rot",
+    "Grape___Esca_(Black_Measles)": "grape_esca",
+    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": "grape_leaf_blight",
+    "Grape___healthy": "grape_healthy",
+    "Orange___Haunglongbing_(Citrus_greening)": "citrus_greening",
+    "Peach___Bacterial_spot": "peach_bacterial_spot",
+    "Peach___healthy": "peach_healthy",
+    "Pepper,_bell___Bacterial_spot": "pepper_bell_bacterial_spot",
+    "Pepper,_bell___healthy": "pepper_bell_healthy",
+    "Potato___Early_blight": "potato_early_blight",
+    "Potato___Late_blight": "potato_late_blight",
+    "Potato___healthy": "potato_healthy",
+    "Raspberry___healthy": "raspberry_healthy",
+    "Soybean___healthy": "soybean_healthy",
+    "Squash___Powdery_mildew": "squash_powdery_mildew",
+    "Strawberry___Leaf_scorch": "strawberry_leaf_scorch",
+    "Strawberry___healthy": "strawberry_healthy",
+    "Tomato___Bacterial_spot": "tomato_bacterial_spot",
+    "Tomato___Early_blight": "tomato_early_blight",
+    "Tomato___Late_blight": "tomato_late_blight",
+    "Tomato___Leaf_Mold": "tomato_leaf_mold",
+    "Tomato___Septoria_leaf_spot": "tomato_septoria_leaf_spot",
+    "Tomato___Spider_mites Two-spotted_spider_mite": "tomato_spider_mites",
+    "Tomato___Target_Spot": "tomato_target_spot",
+    "Tomato___Tomato_Yellow_Leaf_Curl_Virus": "tomato_yellow_leaf_curl_virus",
+    "Tomato___Tomato_mosaic_virus": "tomato_mosaic_virus",
+    "Tomato___healthy": "tomato_healthy"
 }
 
 
 def get_disease_info(key_or_label: str) -> dict:
-    """Retrieve disease or status information by label key."""
-    # Normalize key
+    """Retrieve disease or status information by label key with PlantVillage translation."""
+    if not key_or_label:
+        return {}
+
+    # 1. Exact raw PlantVillage key
+    if key_or_label in PLANTVILLAGE_TO_KB:
+        kb_key = PLANTVILLAGE_TO_KB[key_or_label]
+        if kb_key in KNOWLEDGE_BASE:
+            return KNOWLEDGE_BASE[kb_key]
+
+    # 2. Exact direct match in KNOWLEDGE_BASE
+    if key_or_label in KNOWLEDGE_BASE:
+        return KNOWLEDGE_BASE[key_or_label]
+
+    # 3. Cleaned lowercase key
     clean_key = key_or_label.lower().replace(" ", "_").replace("-", "_")
-    
-    # Direct match
     if clean_key in KNOWLEDGE_BASE:
         return KNOWLEDGE_BASE[clean_key]
-        
-    # Partial matching
+
+    # 4. PlantVillage map normalized lookup
+    for pv_k, kb_k in PLANTVILLAGE_TO_KB.items():
+        if pv_k.lower() == clean_key or kb_k.lower() == clean_key:
+            if kb_k in KNOWLEDGE_BASE:
+                return KNOWLEDGE_BASE[kb_k]
+
+    # 5. Partial matching
     for k, v in KNOWLEDGE_BASE.items():
         if k in clean_key or clean_key in k:
             return v
-            
-    # Default fallback
+
+    # 6. Default fallback
+    readable_name = key_or_label.replace("___", " - ").replace("_", " ").title()
+    is_healthy = "healthy" in clean_key
     return {
-        "name_th": key_or_label.replace("_", " ").title(),
-        "name_en": key_or_label.replace("_", " ").title(),
+        "name_th": readable_name,
+        "name_en": readable_name,
         "category": "general",
         "crop": "พืช / ผลไม้",
-        "is_healthy": "healthy" in clean_key,
-        "severity": "Medium" if "healthy" not in clean_key else "None",
+        "is_healthy": is_healthy,
+        "severity": "Medium" if not is_healthy else "None",
         "symptoms": "มีอาการผิดปกติที่ผิวใบ ผล หรือลำต้น ควรสังเกตรอยด่าง จุดแผล หรือการเจริญเติบโตที่ผิดปกติ",
         "causes": "อาจเกิดจากเชื้อรา แบคทีเรีย ไวรัส หรือความไม่สมดุลของธาตุอาหารและน้ำ",
         "treatment": [

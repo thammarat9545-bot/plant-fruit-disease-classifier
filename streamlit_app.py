@@ -57,7 +57,7 @@ st.markdown("""
 
 # Sidebar
 with st.sidebar:
-    st.image("https://images.unsplash.com/photo-1592417817098-8f3d6910985c?auto=format&fit=crop&w=300&q=80", use_container_width=True)
+    st.image("https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=300&q=80", use_container_width=True)
     st.title("🌿 เมนูการทำงาน")
     
     analysis_mode = st.radio(
