@@ -136,12 +136,17 @@ class PlantFruitClassifier:
 
     def _load_plantvillage_model(self) -> Optional[nn.Module]:
         """Loads the specialized 38-class PlantVillage neural network."""
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(base_dir)
         candidate_paths = [
             self.model_path if self.model_path else "",
             os.path.join("models", "plant_village.pth"),
             os.path.join("models", "plant_village_v2.pth"),
             os.path.join("models", "mobilenet_v2_plantvillage.bin"),
-            os.path.join("models", "best_model.pth")
+            os.path.join("models", "best_model.pth"),
+            os.path.join(project_root, "models", "plant_village.pth"),
+            os.path.join(project_root, "models", "mobilenet_v2_plantvillage.bin"),
+            os.path.join(project_root, "models", "best_model.pth")
         ]
         target_path = next((p for p in candidate_paths if p and os.path.exists(p)), None)
 

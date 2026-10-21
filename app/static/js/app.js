@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const resultPlaceholder = document.getElementById("result-placeholder");
     const resultLoading = document.getElementById("result-loading");
+    const resultError = document.getElementById("result-error");
+    const errorTitle = document.getElementById("error-title");
+    const errorMessage = document.getElementById("error-message");
+    const retryBtn = document.getElementById("retry-btn");
     const resultContent = document.getElementById("result-content");
 
     const modeTabs = document.querySelectorAll(".mode-tab");
@@ -168,46 +172,149 @@ document.addEventListener("DOMContentLoaded", () => {
         imagePreview.src = "";
         previewContainer.classList.add("hidden");
         resultContent.classList.add("hidden");
+        if (resultError) resultError.classList.add("hidden");
         resultPlaceholder.classList.remove("hidden");
     });
 
-    // 6. Manual Analyze Button
+    // 6. Manual Analyze & Retry Buttons
     analyzeBtn.addEventListener("click", () => {
         if (selectedFile) {
             runAnalysis();
         }
     });
 
+    if (retryBtn) {
+        retryBtn.addEventListener("click", () => {
+            if (selectedFile) {
+                runAnalysis();
+            }
+        });
+    }
+
+    /**
+     * Resizes large images client-side before uploading.
+     * Prevents high bandwidth usage, mobile upload timeouts, and backend 512MB RAM OOM.
+     */
+    async function prepareImageForUpload(file) {
+        // If image is already smaller than 1.5MB and not HEIC, send as is
+        if (file.size <= 1.5 * 1024 * 1024 && !file.type.includes("heic")) {
+            return file;
+        }
+
+        return new Promise((resolve) => {
+            const img = new Image();
+            const objectUrl = URL.createObjectURL(file);
+            img.onload = () => {
+                URL.revokeObjectURL(objectUrl);
+                const MAX_DIM = 1280;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > MAX_DIM || height > MAX_DIM) {
+                    if (width > height) {
+                        height = Math.round((height * MAX_DIM) / width);
+                        width = MAX_DIM;
+                    } else {
+                        width = Math.round((width * MAX_DIM) / height);
+                        height = MAX_DIM;
+                    }
+                }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        const optimizedName = file.name.replace(/\.[^/.]+$/, "") + ".jpg";
+                        const optimizedFile = new File([blob], optimizedName, {
+                            type: "image/jpeg",
+                            lastModified: Date.now()
+                        });
+                        resolve(optimizedFile);
+                    } else {
+                        resolve(file);
+                    }
+                }, "image/jpeg", 0.85);
+            };
+            img.onerror = () => {
+                URL.revokeObjectURL(objectUrl);
+                resolve(file);
+            };
+            img.src = objectUrl;
+        });
+    }
+
     // 7. Core Analysis Execution
     async function runAnalysis() {
         if (!selectedFile) return;
 
-        // Show loading state
+        // Reset display states
         resultPlaceholder.classList.add("hidden");
         resultContent.classList.add("hidden");
+        if (resultError) resultError.classList.add("hidden");
         resultLoading.classList.remove("hidden");
         scanAnimation.classList.remove("hidden");
 
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-        formData.append("mode", currentMode);
-
         try {
+            // Compress large images client-side before upload
+            const fileToSend = await prepareImageForUpload(selectedFile);
+
+            const formData = new FormData();
+            formData.append("file", fileToSend);
+            formData.append("mode", currentMode);
+
             const response = await fetch("/api/predict", {
                 method: "POST",
                 body: formData
             });
 
             if (!response.ok) {
-                const errData = await response.json();
-                throw new Error(errData.detail || "เกิดข้อผิดพลาดในการประมวลผล");
+                let errorMessageText = `เซิร์ฟเวอร์ตอบกลับรหัสข้อผิดพลาด (${response.status})`;
+                try {
+                    const contentType = response.headers.get("content-type") || "";
+                    if (contentType.includes("application/json")) {
+                        const errData = await response.json();
+                        errorMessageText = errData.detail || errData.error || errorMessageText;
+                    } else {
+                        const text = await response.text();
+                        if (response.status === 502 || response.status === 504 || response.status === 503) {
+                            errorMessageText = "เซิร์ฟเวอร์ Render (Free Plan) กำลังเริ่มทำงานจากโหมดพัก (Cold Start) กรุณารอสักครู่ (ประมาณ 20-30 วินาที) แล้วกดปุ่ม 'ลองใหม่อีกครั้ง'";
+                        } else if (text && text.trim().length > 0 && text.trim().length < 200 && !text.includes("<!DOCTYPE")) {
+                            errorMessageText = text.trim();
+                        }
+                    }
+                } catch (_) {
+                    if (response.status === 502 || response.status === 504 || response.status === 503) {
+                        errorMessageText = "เซิร์ฟเวอร์ Render (Free Plan) กำลังเริ่มทำงานจากโหมดพัก (Cold Start) กรุณารอสักครู่ (ประมาณ 20-30 วินาที) แล้วกดปุ่ม 'ลองใหม่อีกครั้ง'";
+                    }
+                }
+                throw new Error(errorMessageText);
+            }
+
+            const contentType = response.headers.get("content-type") || "";
+            if (!contentType.includes("application/json")) {
+                throw new Error("เซิร์ฟเวอร์ส่งข้อมูลกลับมาในรูปแบบที่ไม่ถูกต้อง (กรุณากดลองใหม่อีกครั้ง)");
             }
 
             const data = await response.json();
+            if (!data.success && data.error) {
+                throw new Error(data.error);
+            }
+
             renderResult(data.prediction);
         } catch (error) {
-            alert(`ไม่สามารถวิเคราะห์ได้: ${error.message}`);
-            resultPlaceholder.classList.remove("hidden");
+            console.error("Analysis error:", error);
+            if (resultError && errorMessage) {
+                errorMessage.textContent = error.message;
+                resultError.classList.remove("hidden");
+                if (window.lucide) lucide.createIcons();
+            } else {
+                alert(`ไม่สามารถวิเคราะห์ได้: ${error.message}`);
+                resultPlaceholder.classList.remove("hidden");
+            }
         } finally {
             resultLoading.classList.add("hidden");
             scanAnimation.classList.add("hidden");

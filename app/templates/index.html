@@ -203,6 +203,21 @@
                     <p class="text-xs text-slate-500 mt-1">ประมวลผลคุณลักษณะด้วย Convolutional Neural Network</p>
                 </div>
 
+                <!-- Error State Card -->
+                <div id="result-error" class="hidden bg-white rounded-2xl border border-rose-200 p-8 text-center shadow-sm flex flex-col items-center justify-center min-h-[420px]">
+                    <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mb-4 border border-rose-100">
+                        <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-800" id="error-title">เกิดข้อผิดพลาดในการวิเคราะห์</h3>
+                    <p class="text-xs text-slate-600 max-w-md mt-2 leading-relaxed" id="error-message">
+                        รายละเอียดข้อผิดพลาด
+                    </p>
+                    <button type="button" id="retry-btn" class="mt-5 px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold shadow-sm flex items-center gap-2 transition">
+                        <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                        <span>ลองใหม่อีกครั้ง (Retry)</span>
+                    </button>
+                </div>
+
                 <!-- Analysis Result Card -->
                 <div id="result-content" class="hidden space-y-6">
 

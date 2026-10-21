@@ -6,6 +6,7 @@ Provides RESTful API and renders responsive web interface.
 import os
 import io
 import torch
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, File, UploadFile, Form, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -16,10 +17,24 @@ from PIL import Image
 from app.model_engine import get_classifier, PLANT_DISEASE_CLASSES, RIPENESS_CLASSES, FOOD_CLASSES
 from app.knowledge_base import KNOWLEDGE_BASE
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Pre-warm AI inference engine on startup so requests respond immediately."""
+    try:
+        print("[Startup] Pre-warming classifier and AI neural networks...")
+        get_classifier()
+        print("[Startup] AI Inference Engine warmed up and ready!")
+    except Exception as e:
+        print(f"[Startup] Warning during model warm-up: {e}")
+    yield
+
+
 app = FastAPI(
     title="Plant & Fruit Disease AI Classifier",
     description="ระบบตรวจจับและวินิจฉัยโรคพืช ความสุกของผลไม้ และอาหารด้วย AI",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # CORS middleware
@@ -98,26 +113,55 @@ async def predict_image(
     Accepts an uploaded image, classifies disease/ripeness/food,
     and returns comprehensive medical/agricultural recommendations.
     """
-    # Validate mime type
-    if not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="ไฟล์ที่อัปโหลดต้องเป็นรูปภาพเท่านั้น (.jpg, .jpeg, .png, .webp)")
+    content_type = file.content_type or ""
+    filename = (file.filename or "").lower()
+    is_valid_ext = filename.endswith((".jpg", ".jpeg", ".png", ".webp", ".bmp", ".jfif"))
+
+    if not (content_type.startswith("image/") or content_type == "application/octet-stream" or is_valid_ext):
+        raise HTTPException(
+            status_code=400,
+            detail="ไฟล์ที่อัปโหลดต้องเป็นรูปภาพเท่านั้น (.jpg, .jpeg, .png, .webp)"
+        )
 
     try:
         contents = await file.read()
-        image = Image.open(io.BytesIO(contents))
-        
+        if not contents or len(contents) == 0:
+            raise HTTPException(status_code=400, detail="ไม่พบข้อมูลในไฟล์รูปภาพที่อัปโหลด")
+
+        try:
+            image = Image.open(io.BytesIO(contents))
+            image.verify()
+            image = Image.open(io.BytesIO(contents))
+        except Exception:
+            raise HTTPException(status_code=400, detail="ไฟล์รูปภาพเสียหายหรือไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")
+
+        if image.mode != "RGB":
+            image = image.convert("RGB")
+
+        # Memory optimization for 512MB RAM environment:
+        # Downscale immediately if image is larger than 1280px to avoid OOM
+        if max(image.size) > 1280:
+            image.thumbnail((1280, 1280), Image.Resampling.LANCZOS)
+
         # Run inference
         classifier = get_classifier()
         result = classifier.predict(image, mode=mode)
-        
+
         return JSONResponse(content={
             "success": True,
             "filename": file.filename,
             "mode": result["mode"],
             "prediction": result
         })
+    except HTTPException:
+        raise
     except Exception as e:
+        error_msg = f"เกิดข้อผิดพลาดในการประมวลผลภาพ: {str(e)}"
         return JSONResponse(
             status_code=500,
-            content={"success": False, "error": f"เกิดข้อผิดพลาดในการประมวลผลภาพ: {str(e)}"}
+            content={
+                "success": False,
+                "detail": error_msg,
+                "error": error_msg
+            }
         )

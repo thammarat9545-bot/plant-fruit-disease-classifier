@@ -5,7 +5,8 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8000
+    PORT=8000 \
+    TORCH_HOME=/app/.torch_cache
 
 # Install minimal OS dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -18,6 +19,9 @@ RUN pip install --no-cache-dir torch torchvision --index-url https://download.py
 # Install remaining web and application dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir fastapi uvicorn[standard] python-multipart jinja2 pillow streamlit
+
+# Pre-download and cache ImageNet backbone weights during build so inference starts instantly and without runtime network delays
+RUN python -c "from torchvision import models; models.mobilenet_v3_large(weights=models.MobileNet_V3_Large_Weights.DEFAULT)"
 
 # Copy project source code
 COPY . .
