@@ -1,34 +1,109 @@
-/* Custom styling for Plant & Fruit Classifier */
+/* Custom styling for Plant & Fruit Classifier - Designed to match Slide & Report Wireframe */
+
+:root {
+    --forest-green: #1b4332;
+    --forest-green-dark: #143527;
+    --forest-accent: #2d6a4f;
+    --leaf-emerald: #16a34a;
+}
+
+body {
+    background-color: #f3f6f3;
+}
+
+.bg-forest-header {
+    background: linear-gradient(135deg, #143e2b 0%, #1b4d36 50%, #153b29 100%);
+    box-shadow: 0 4px 20px -2px rgba(19, 62, 41, 0.35);
+}
+
+.nav-link {
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: #ffffff;
+    border-color: #4ade80;
+}
+
+.mode-tab {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .active-tab {
-    background-color: #16a34a;
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
 }
 
 .inactive-tab {
     background-color: #ffffff;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    color: #334155;
+    border: 1px solid #dcfce7;
 }
 
 .inactive-tab:hover {
-    background-color: #f8fafc;
-    color: #0f172a;
+    background-color: #f0fdf4;
+    color: #15803d;
+    border-color: #86efac;
+}
+
+/* Button Analyze (Full width deep forest green) */
+.btn-analyze {
+    background: linear-gradient(135deg, #1b4d36 0%, #166534 100%);
+    box-shadow: 0 4px 14px rgba(22, 101, 52, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-analyze:hover {
+    background: linear-gradient(135deg, #153e2b 0%, #14532d 100%);
+    box-shadow: 0 6px 20px rgba(22, 101, 52, 0.45);
+    transform: translateY(-1px);
+}
+
+.btn-analyze:active {
+    transform: translateY(0);
+}
+
+/* Numbered badge for recommendations (1, 2, 3, 4) */
+.badge-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background-color: #16a34a;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
 }
 
 /* Animated scanning laser on preview image */
 @keyframes scanline {
     0% {
-        transform: translateY(-100%);
+        top: 0%;
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
     }
     100% {
-        transform: translateY(100%);
+        top: 100%;
+        opacity: 0.8;
     }
 }
 
 .scan-line {
-    animation: scanline 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #22c55e 50%, transparent 100%);
+    box-shadow: 0 0 15px #22c55e, 0 0 5px #4ade80;
+    animation: scanline 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* Custom scrollbars */

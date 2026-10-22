@@ -69,12 +69,13 @@ async def home():
 async def health_check():
     """Health check endpoint and GPU capability information."""
     cuda_available = torch.cuda.is_available()
-    gpu_name = torch.cuda.get_device_name(0) if cuda_available else "None (Running on CPU)"
+    gpu_name = torch.cuda.get_device_name(0) if cuda_available else "CPU Mode (ResNet50 Active)"
     return {
         "status": "online",
         "pytorch_version": torch.__version__,
         "cuda_available": cuda_available,
         "device": gpu_name,
+        "model_architecture": "ResNet-50 & MobileNet",
         "total_classes": len(PLANT_DISEASE_CLASSES) + len(RIPENESS_CLASSES) + len(FOOD_CLASSES)
     }
 
@@ -147,12 +148,31 @@ async def predict_image(
         classifier = get_classifier()
         result = classifier.predict(image, mode=mode)
 
-        return JSONResponse(content={
+        # Return structured response matching Chapter 3.5.2 & UI requirements
+        response_data = {
+            "status": "success",
             "success": True,
             "filename": file.filename,
-            "mode": result["mode"],
+            "mode": result.get("mode", mode),
+            "predicted_class": result.get("predicted_class", ""),
+            "thai_name": result.get("thai_name", result.get("name_th", "")),
+            "name_th": result.get("name_th", result.get("thai_name", "")),
+            "name_en": result.get("name_en", ""),
+            "category": result.get("category", ""),
+            "crop": result.get("crop", "พืช / ผลไม้"),
+            "confidence": result.get("confidence", 0.0),
+            "is_healthy": result.get("is_healthy", False),
+            "severity": result.get("severity", "Medium"),
+            "symptoms": result.get("symptoms", ""),
+            "causes": result.get("causes", ""),
+            "treatment": result.get("treatment", []),
+            "prevention": result.get("prevention", []),
+            "recommendation": result.get("recommendation", ""),
+            "top_predictions": result.get("top_predictions", []),
+            "execution_time_ms": result.get("execution_time_ms", 0.0),
             "prediction": result
-        })
+        }
+        return JSONResponse(content=response_data)
     except HTTPException:
         raise
     except Exception as e:

@@ -8,5 +8,6 @@ venv/
 dataset/
 models/*.pth
 !models/best_model.pth
+!models/plant_fruit_resnet50_best.pth
 .vscode/
 .idea/

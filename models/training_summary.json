@@ -1,0 +1,57 @@
+{
+  "architecture": "resnet50",
+  "num_classes": 7,
+  "classes": [
+    "Early_Blight",
+    "Fruit_Ripe",
+    "Fruit_Rotten",
+    "Fruit_Unripe",
+    "Healthy_Leaf",
+    "Late_Blight",
+    "Leaf_Rust"
+  ],
+  "best_val_acc": 100.0,
+  "total_time_seconds": 406.55,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.4238,
+      "train_acc": 80.86,
+      "val_loss": 0.4384,
+      "val_acc": 100.0,
+      "time_sec": 80.1
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.175,
+      "train_acc": 99.71,
+      "val_loss": 0.0024,
+      "val_acc": 100.0,
+      "time_sec": 80.56
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0189,
+      "train_acc": 100.0,
+      "val_loss": 0.0009,
+      "val_acc": 100.0,
+      "time_sec": 80.67
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0076,
+      "train_acc": 100.0,
+      "val_loss": 0.0005,
+      "val_acc": 100.0,
+      "time_sec": 84.27
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0028,
+      "train_acc": 100.0,
+      "val_loss": 0.0003,
+      "val_acc": 100.0,
+      "time_sec": 79.91
+    }
+  ]
+}
